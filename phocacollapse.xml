@@ -2,12 +2,13 @@
 <extension type="plugin" group="system" method="upgrade" version="6.0">
 	<name>plg_system_phocacollapse</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>18/11/2025</creationDate>
+	<contributor>Niklas Olofsson</contributor>
+	<creationDate>24/07/2026</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>6.0.1</version>
+	<version>6.1.0</version>
 	<description>PLG_SYSTEM_PHOCACOLLAPSE_DESCRIPTION</description>
 	<projectName>PhocaCollapse</projectName>
 
@@ -27,28 +28,86 @@
 	<languages>
 		<language tag="en-GB">language/en-GB/en-GB.plg_system_phocacollapse.ini</language>
 		<language tag="en-GB">language/en-GB/en-GB.plg_system_phocacollapse.sys.ini</language>
+		
+		<language tag="de-DE">language/de-DE/de-DE.plg_system_phocacollapse.ini</language>
+		<language tag="de-DE">language/de-DE/de-DE.plg_system_phocacollapse.sys.ini</language>
+	
 	</languages>
 
 	<administration>
 		<languages>
 			<language tag="en-GB">language/en-GB/en-GB.plg_system_phocacollapse.ini</language>
 			<language tag="en-GB">language/en-GB/en-GB.plg_system_phocacollapse.sys.ini</language>
+			
+			<language tag="de-DE">language/de-DE/de-DE.plg_system_phocacollapse.ini</language>
+			<language tag="de-DE">language/de-DE/de-DE.plg_system_phocacollapse.sys.ini</language>
+	
 		</languages>
 	</administration>
-	
+
 	<config>
 		<fields name="params" addfieldpath="/plugins/system/phocacollapse/models/fields">
 			<fieldset name="basic">
 
-				<field name="text_format" type="list" default="1" label="PLG_SYSTEM_PHOCACOLLAPSE_TEXT_FORMAT_LABEL" description="PLG_SYSTEM_PHOCACOLLAPSE_TEXT_FORMAT_DESC">
+				<field
+					name="text_format"
+					type="list"
+					default="1"
+					label="PLG_SYSTEM_PHOCACOLLAPSE_TEXT_FORMAT_LABEL"
+					description="PLG_SYSTEM_PHOCACOLLAPSE_TEXT_FORMAT_DESC">
+
 					<option value="1">PLG_SYSTEM_PHOCACOLLAPSE_ICON_TEXT</option>
 					<option value="2">PLG_SYSTEM_PHOCACOLLAPSE_TEXT_ONLY</option>
 					<option value="3">PLG_SYSTEM_PHOCACOLLAPSE_ICON_ONLY</option>
+
 				</field>
 
-                <field name="frontend_active" type="list" default="0" label="PLG_SYSTEM_PHOCACOLLAPSE_ACTIVE_IN_FRONTEND_LABEL" description="PLG_SYSTEM_PHOCACOLLAPSE_ACTIVE_IN_FRONTEND_DESC">
+				<field
+					name="icon_style"
+					type="list"
+					default="chevron"
+					label="PLG_SYSTEM_PHOCACOLLAPSE_ICON_STYLE_LABEL"
+					description="PLG_SYSTEM_PHOCACOLLAPSE_ICON_STYLE_DESC">
+
+					<option value="eye">PLG_SYSTEM_PHOCACOLLAPSE_ICON_EYE</option>
+					<option value="chevron">PLG_SYSTEM_PHOCACOLLAPSE_ICON_CHEVRON</option>
+
+				</field>
+
+				<field
+					name="individual_collapse"
+					type="list"
+					default="0"
+					label="PLG_SYSTEM_PHOCACOLLAPSE_INDIVIDUAL_LABEL"
+					description="PLG_SYSTEM_PHOCACOLLAPSE_INDIVIDUAL_DESC">
+
 					<option value="0">PLG_SYSTEM_PHOCACOLLAPSE_NO</option>
 					<option value="1">PLG_SYSTEM_PHOCACOLLAPSE_YES</option>
+
+				</field>
+				<field
+					name="preserve_collapse_state"
+					type="radio"
+					layout="joomla.form.field.radio.switcher"
+					default="0"
+					label="PLG_SYSTEM_PHOCACOLLAPSE_PRESERVE_STATE_LABEL"
+					description="PLG_SYSTEM_PHOCACOLLAPSE_PRESERVE_STATE_DESC">
+					
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+
+				<field
+					name="frontend_active"
+					type="list"
+					default="0"
+					label="PLG_SYSTEM_PHOCACOLLAPSE_ACTIVE_IN_FRONTEND_LABEL"
+					description="PLG_SYSTEM_PHOCACOLLAPSE_ACTIVE_IN_FRONTEND_DESC">
+
+					<option value="0">PLG_SYSTEM_PHOCACOLLAPSE_NO</option>
+					<option value="1">PLG_SYSTEM_PHOCACOLLAPSE_YES</option>
+
 				</field>
 
 			</fieldset>
@@ -56,6 +115,10 @@
 	</config>
 
 	<updateservers>
-		<server type="extension" name="PLG_SYSTEM_PHOCACOLLAPSE" priority="1"><![CDATA[https://raw.githubusercontent.com/PhocaCz/PhocaCollapse/main/manifest.xml]]></server>
+		<server
+			type="extension"
+			name="PLG_SYSTEM_PHOCACOLLAPSE"
+			priority="1"><![CDATA[https://raw.githubusercontent.com/PhocaCz/PhocaCollapse/main/manifest.xml]]></server>
 	</updateservers>
+
 </extension>
