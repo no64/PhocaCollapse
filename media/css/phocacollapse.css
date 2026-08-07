@@ -1,55 +1,43 @@
-
 /* --------------------------------------------------
    General
 -------------------------------------------------- */
 
-/* Menu List / Tag List / Category List */
-table.table tr.ph-collapse-hidden-menu th div,
-table.table tr.ph-collapse-hidden-menu td div {
-	display: none;
-}
-
-/* Article List */
-table.table tr.ph-collapse-hidden-article th div div,
-table.table tr.ph-collapse-hidden-article td div div{
-	display: none;
-}
-
-/* Fields List / Contacts List */
-table.table tr.ph-collapse-hidden-field th > div > div,
-table.table tr.ph-collapse-hidden-field td > div > div {
+/* Articles List / Contacts List / Fields List */
+table.table.ph-collapse-hidden-div-div tr th > div > div,
+table.table.ph-collapse-hidden-div-div tr td > div {
     display: none;
 }
+/* Menu List / Category List / Tag List */
+table.table.ph-collapse-hidden-div tr th div,
+table.table.ph-collapse-hidden-div tr td div {
+    display: none;
+}
+
 
 
 /* --------------------------------------------------
    SUBFORM
 -------------------------------------------------- */
-.subform-repeatable-group.ph-collapse-hidden {
-	padding: 1em;
-}
-
 .ph-collapse-title {
 	font-weight: normal;
 	padding: 0.6em;
-	margin: 0 0 0 50px;
-
+	margin: 0 40px 0 40px;
 	background: #f8f8f8;
-	border-radius: 3px;
-	
+	border-radius: 3px;	
 	white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
-    max-inline-size: 50ch;
+    max-inline-size: 80ch;
 }
 
 div.subform-repeatable-group {
 	border-radius: .25rem;
 	margin-block-start: 15px;
-	padding: 32px 32px 16px 28px;
+	padding: 42px 32px 16px 28px;
 }
-
+div.subform-repeatable-group.ph-collapse-hidden {
+	padding: 1em;
+}
 div.subform-repeatable-group .control-group .control-label {
 	inline-size: 200px;
 	padding: .3rem 1rem .3rem 0;
@@ -58,7 +46,9 @@ div.subform-repeatable-group .control-group .control-label {
 	font-size: 14px;
 	vertical-align: middle;
 }
-
+.subform-repeatable-wrapper .btn-toolbar {
+  	border-radius: 0 .25rem .25rem 0;
+}
 
 /* Joomla Dark/Light modes */
 [data-color-scheme="dark"] .ph-collapse-hidden .ph-collapse-title {
@@ -66,6 +56,9 @@ div.subform-repeatable-group .control-group .control-label {
   	color: #dee2e6bf;
 }
 [data-color-scheme="dark"] .subform-repeatable-group.ph-collapse-hidden {
+  	background: #171c24;
+}
+[data-color-scheme="dark"] .subform-repeatable-wrapper .btn-toolbar {
   	background: #171c24;
 }
 
@@ -77,7 +70,9 @@ div.subform-repeatable-group .control-group .control-label {
 [data-color-scheme="light"] .subform-repeatable-group.ph-collapse-hidden {
   	background: #f0f4fb;
 }
-
+[data-color-scheme="light"] .subform-repeatable-wrapper .btn-toolbar {
+  	background: #f0f4fb;
+}
 
 /* hide up/down chevrons on drag-button*/
 div.subform-repeatable-group > .btn-toolbar .btn.group-move-up,
@@ -86,35 +81,87 @@ div.subform-repeatable-group > .btn-toolbar .btn.group-move-down {
 }
 
 
-
 /* --------------------------------------------------
    Collapse
 -------------------------------------------------- */
 
 /* global / parent collapse button */
-.ph-collapse .phCollapseClick {
-	float: right;
-	margin-left:.75rem;
+.ph-collapse {
+	display: flex;
+	align-items: center;
+	float:right;
+	height:30px;
+	margin-left: 0.8rem;
 }
-.ph-collapse .phCollapseClick .ph-collapse-text {
-	margin-left:.5rem;
+.ph-collapse .phCollapseClick {
+	transition: background 0.1s ease-in-out, color 0.1s ease-in-out;
+	margin-left: 0.2rem;
+}
+.ph-collapse .phCollapseClick span {
+	margin-left: .2rem;
+	margin-right: .2rem;
 }
 
+
+/* Reset-Icon */
+.ph-collapse .ph-reset-icon-trigger {
+  	text-decoration: none;   
+    font-size: 0.95rem;
+    font-weight: normal;
+         
+    margin-right: 0.5rem;
+    opacity: 0.4;
+    transition: color 0.1s ease-in-out, opacity 0.1s ease-in-out;
+}
+.ph-collapse .ph-reset-icon-trigger:hover {
+    color: #dc3545 !important;
+    opacity: 0.9;
+}
+
+
+/* Indicators */
+.ph-collapse .ph-indicator-group {
+	display: flex;
+	align-items: center;
+	height:30px;
+	/*margin-right: .4rem;*/
+}
+.ph-indicator-group .indicator {
+    font-size: 0.8rem;
+    font-weight: 600;
+      
+    margin-right: 0.6rem;
+    
+    opacity: 0.4;
+    transition: opacity 0.1s ease-in-out;
+}
+.ph-indicator-group .indicator:hover {
+	opacity: 0.6;
+}
+
+
+/* Indicator group inside subform */
+.ph-custom-toolbar .ph-indicator-group {
+	position: absolute;
+	inset-block-start: 0px;
+	inset-inline-end: 10px;	
+    display: flex;
+    align-items: center;
+    height:30px;
+}
+
+
 /* single collapse button in subform */
-#item-form div.subform-repeatable-group > .btn-toolbar .btn.group-collapse {	
+div.subform-repeatable-group > .btn-toolbar .btn.group-collapse {	
 	border-radius: .25rem 0 .25rem 0;
 	inset-block-start: 0%;
 	inset-inline-start: 1px;
 }
-
-
 .subform-repeatable-group.ph-collapse-hidden div.control-group {
 	display: none;
 }
-
 /* Hide global collapse button for non-repeatable subforms */
 .subform-repeatable-wrapper:not(:has(> .subform-repeatable > .btn-toolbar)) > .ph-collapse {
     display: none;
 }
-
 
