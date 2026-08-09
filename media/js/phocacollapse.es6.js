@@ -10,7 +10,7 @@
  *
  * @author      Jan Pavelka
  * @author      Niklas Olofsson
- * Subform Collapse System Plugin Script - Version - 6.1.5
+ * Subform Collapse System Plugin Script - Version - 6.1.6
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -154,8 +154,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         return false;
     }
-    
-    
+    /**
+     * Validates if a subform wrapper uses the required strict 'Form' layout style.
+     * Returns false for table, standard, or form-grid layout architectures to prevent
+     * visual DOM reconstruction errors.
+     * 
+     * @param {HTMLElement} wrapper - The target subform wrapper element
+     * @returns {boolean} True if the wrapper matches the exact Form layout signature
+     */
+    function isFormLayout(wrapper) {
+        if (!wrapper) return false;
+        
+        // 1. Hard-abort on table or default/standard layout wrappers instantly
+        if (wrapper.classList.contains('subform-table-layout')) return false;
+        
+        // 2. Hard-abort on the newer modern Bootstrap-Grid layouts
+        if (wrapper.classList.contains('subform-layout-grid')) return false;
+        
+        // 3. Enforce strict match: wrapper MUST contain 'subform-layout' to pass the gate
+        return wrapper.classList.contains('subform-layout');
+    }
 
  
 	// -------------------------------------------------------
@@ -552,6 +570,12 @@ document.addEventListener("DOMContentLoaded", () => {
     function addGroupCollapseButtons() {
         const groups = document.querySelectorAll(groupSelector);
         groups.forEach(function(group) {
+	        
+	        // --- NEU: Verhindert das Injizieren von Einzel-Buttons in Tabellen oder Grids ---
+            const parentWrapper = group.closest(wrapperSelector);
+            if (parentWrapper && !isFormLayout(parentWrapper)) return;
+            // -----------------------------------------------------------
+            
             if (!hasCollapsibleContent(group)) return;
             // 1. Locate Joomla's native repeatable subform toolbar group row
             let toolbar = group.querySelector(':scope > .btn-toolbar .btn-group');
@@ -621,6 +645,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         // Iterate through all found subform row groups to evaluate individual initialization rules
         document.querySelectorAll(groupSelector).forEach(group => {
+	        
+	        // --- Checking layout style of current SUBFORM ---
+            const parentWrapper = group.closest(wrapperSelector);
+            if (!parentWrapper || !isFormLayout(parentWrapper)) {
+                return; // Überspringt diese Zeile komplett, wenn es kein Formular-Layout ist!
+            }
+            // ----------------------------------------------------
+            
+            
             let restored = false;
             // Priority 1: Check if an entry exists in session storage payload, then apply it instantly
             if (options.restoreCollapseState && sessionStates && Object.keys(sessionStates).length > 0) {
@@ -655,8 +688,17 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
         // Refresh master control interaction bars globally for all wrapper instances at the very end
-        document.querySelectorAll(wrapperSelector).forEach(wrapper => updateGlobalCollapseButton(wrapper));
+        //document.querySelectorAll(wrapperSelector).forEach(wrapper => updateGlobalCollapseButton(wrapper));
+        // Sichert ab, dass leere Tabellen- oder Grid-Subforms keine Reste anzeigen
+        document.querySelectorAll(wrapperSelector).forEach(wrapper => {
+            if (isFormLayout(wrapper)) {
+                updateGlobalCollapseButton(wrapper);
+            }
+        });
+        
     }
+    
+    
     // FAST-TRACK STARTUP LOGIC: Ignores heavy asset/image loading delays and enforces early structural injection 
     // immediately after the HTML skeleton is drawn to eliminate severe visual layout flashing (FOUC)
     if (document.readyState === 'loading') {
@@ -704,6 +746,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     // Intercept and recalculate layouts upon dynamic row removal loops
     document.addEventListener('subform-row-remove', function(event) {
+	    
+	    // --- NEU: Brich sofort ab, wenn die gelöschte Reihe zu einer Tabelle/Grid gehört ---
+        const targetWrapper = event.target ? event.target.closest(wrapperSelector) : null;
+        if (targetWrapper && !isFormLayout(targetWrapper)) return;
+        // -----------------------------------------------------------------------------------
+
+	    
         setTimeout(() => {
             if (options.individualCollapse) {
                 addGroupCollapseButtons();
