@@ -4,7 +4,7 @@ This changelog documents the enhancements and improvements introduced in this ex
 
 ---
 
-## - 6.1.6  2026-08-09
+## 6.1.6 - 2026-08-09
 ### Added
 - Native layout protection barrier auto-disabling the plugin on table and grid layouts.
 - Advanced title extraction tracking for radio buttons and switchers (human-readable text).
