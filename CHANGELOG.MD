@@ -4,7 +4,7 @@ This changelog documents the enhancements and improvements introduced in this ex
 
 ---
 
-## - 2026-08-09
+## - 6.1.6  2026-08-09
 ### Added
 - Native layout protection barrier auto-disabling the plugin on table and grid layouts.
 - Advanced title extraction tracking for radio buttons and switchers (human-readable text).
@@ -13,10 +13,9 @@ This changelog documents the enhancements and improvements introduced in this ex
 - Critical asset parsing crash with YOOtheme Pro 5 pagebuilder interface engines.
 - Synchronized XML configuration variables and missing language string fallbacks.
 
-
+---
 
 ## 6.1.5 – 2026-08-04
-
 ### Added
 * Added a dedicated global Reset Button option (`show_reset_button`) to completely purge all preserved storage entries and instantly restore default configuration layouts.
 * Added an intelligent nested structural evaluation option (`initial_nested_collapse`) to force deeply nested subform rows to start safely collapsed even when the global parent layout configuration is set to expanded, drastically reducing visual clutter.
@@ -28,7 +27,6 @@ This changelog documents the enhancements and improvements introduced in this ex
 ---
 
 ## 6.1.4 – 2026-08-03
-
 ### Added
 * Added new field option `show_status_indicators` to toggle the visibility of active state configuration icons (bookmark/clock/database) next to collapse toolbars.
 * Added support for non-repeatable subforms by dynamically generating a native fallback toolbar layout (`btn-toolbar ph-custom-toolbar`) to inject individual collapse triggers.
@@ -49,7 +47,6 @@ This changelog documents the enhancements and improvements introduced in this ex
 ---
 
 ## 6.1.3 – 2026-08-01
-
 ### Added
 * Added option `title_field_index` to select which field (1st, 2nd, 3rd, etc.) is used to generate the collapse title.
 * Added cascading fallback logic for empty title fields to prevent empty collapse headers.
@@ -68,7 +65,6 @@ This changelog documents the enhancements and improvements introduced in this ex
 ---
 
 ## 6.1.2 – 2026-07-31
-
 ### Added
 * Added option `restore_collapse_state_after_save` to restore the current subform collapse state after **Apply** (`article.apply`).
 * Added option `storage_type` to choose between temporary (Session Storage) and persistent state storage.
@@ -87,7 +83,6 @@ This changelog documents the enhancements and improvements introduced in this ex
 ---
 
 ## 6.1.1 – 2026-07-28
-
 ### Added
 * Added option `initial_collapse_state` to define whether subforms are initially expanded or collapsed when opening the page.
 * Added support for custom layout rows `phTemplateRow` and `phTemplateColumn`.
@@ -95,7 +90,6 @@ This changelog documents the enhancements and improvements introduced in this ex
 ---
 
 ## 6.1.0 – 2026-07-27
-
 ### Added
 * Implemented complete subform collapse functionality for Joomla 5 and Joomla 6.
 * Added dynamic collapse title generation based on the content of configurable form fields.
